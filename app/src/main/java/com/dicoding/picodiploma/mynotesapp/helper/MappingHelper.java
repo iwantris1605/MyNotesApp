@@ -23,4 +23,14 @@ public class MappingHelper {
 
         return notesList;
     }
+
+    //menambahkan kelas sebagai fungsi dari cursor to object
+    public static Note mapCursorToObject(Cursor notesCursor) {
+        notesCursor.moveToFirst();
+        int id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.NoteColumns._ID));
+        String title = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.NoteColumns.TITLE));
+        String description = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.NoteColumns.DESCRIPTION));
+        String date = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.NoteColumns.DATE));
+        return new Note(id, title, description, date);
+    }
 }
